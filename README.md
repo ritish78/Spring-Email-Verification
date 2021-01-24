@@ -58,7 +58,7 @@ Tomcat should start on port 8090.
     "password": "password"
 }
 ````
-The server will send back the UUID of the created User.
+
 ![In Postman creating a user](https://user-images.githubusercontent.com/36816476/105572756-40a1c100-5dad-11eb-9d81-fb7e8c0217ac.PNG)
 
 * Checking the user in database. Here, we are using H2 database.
