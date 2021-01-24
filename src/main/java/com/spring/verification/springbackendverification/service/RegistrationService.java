@@ -38,6 +38,8 @@ public class RegistrationService {
                     request.getPassword(),
                     AppUserRole.USER));
 
+            //Since, we are running the spring boot application in localhost, we are hardcoding the
+            //url of the server. We are creating a POST request with token param
             String link = "http://localhost:8090/api/v1/registration/confirm?token=" + tokenForNewUser;
             emailSender.sendEmail(request.getEmail(), buildEmail(request.getFirstName(), link));
             return tokenForNewUser;
@@ -60,10 +62,16 @@ public class RegistrationService {
         }
 
         LocalDateTime expiresAt = confirmToken.get().getExpiresAt();
+
+        if (expiresAt.isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Token is already expired!");
+        }
+
+        confirmTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(confirmToken.get().getAppUser().getEmail());
 
-        //Returning just "confirmed" if the token matches
-        return "confirmed";
+        //Returning confirmation message if the token matches
+        return "Your email is confirmed. Thank you for using our service!";
     }
 
     private String buildEmail(String name, String link) {
