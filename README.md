@@ -6,7 +6,25 @@ A Spring Boot project to send and verify email using tokens
 
 # How to install:
 
-In terminal:
+There are two ways by which you can try this out:
+Easy way is to use Docker:
+```
+docker pull ritish56/spring-email-verification
+```
+Then, to run the docker image:
+```
+docker run -p 8090:8090 ritish56/spring-email-verification
+```
+You also need to start Maildev. To do so, in separate terminal, give command:
+```
+docker pull maildev/maildev
+```
+Then, run the maildev with the required port:
+```
+docker run -p 1025:1025 -p 1080:1080 maildev/maildev
+```
+
+And the second way is to clone the repo if you don't have docker. In terminal:
 
 ````
 git clone https://github.com/ritish78/Spring-Email-Verification.git
